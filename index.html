@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Deep purple rocker</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+		<style>
+
+			.box {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: calc(100vh - 69px);
+				width: 100%;
+				flex-flow: wrap;
+				background-image: url('background.jpg');
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+			}
+
+			.key {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 80px;
+				height: 80px;
+				background-color: deepskyblue;
+				margin: 20px;
+				font-size: 40px;
+				transition: all 0.07s;
+				color: white;
+			}
+
+			.spaceBar {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-wrap: wrap;
+				width: 300px;
+				height: 80px;
+				background-color: deepskyblue;
+				margin: 20px;
+				font-size: 40px;
+				transition: all 0.07s;
+				color: white;
+			}
+
+			.playing {
+				transform: scale(1.1);
+				background-color: tomato;
+			}
+
+			.break {
+				flex-basis: 100%;
+			  width: 0px;
+			  height: 0px;
+			  overflow: hidden;
+			}
+
+		</style>
+  </head>
+  <body>
+
+		<audio id="1" src="1.wav" type="audio/wav"></audio>
+		<audio id="2" src="2.wav" type="audio/wav"></audio>
+		<audio id="3" src="3.wav" type="audio/wav"></audio>
+		<audio id="4" src="4.wav" type="audio/wav"></audio>
+		<audio id="bass" src="bass.wav" type="audio/wav"></audio>
+
+		<h1 class="text-center">Let's play "Smoke on the water" song on keyboard!</h1>
+
+		<div class="box">
+
+			<div class="key D">
+				D
+			</div>
+			<div class="key F">
+				F
+			</div>
+			<div class="key J">
+				J
+			</div>
+			<div class="key K">
+				K
+			</div>
+			<div class="break">
+
+			</div>
+			<div class="spaceBar">
+				SPACE
+			</div>
+
+		</div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script type="text/javascript">
+
+			function firstChord() {
+				$('#1').get(0).currentTime = 0;
+				$('#1').get(0).play();
+				$('.D').addClass('playing');
+			}
+
+			function secondChord() {
+				$('#2').get(0).currentTime = 0;
+				$('#2').get(0).play();
+				$('.F').addClass('playing');
+			}
+
+			function thridChord() {
+				$('#3').get(0).currentTime = 0;
+				$('#3').get(0).play();
+				$('.J').addClass('playing');
+			}
+
+			function fourthChord() {
+				$('#4').get(0).currentTime = 0;
+				$('#4').get(0).play();
+				$('.K').addClass('playing');
+			}
+
+			function bass() {
+				$('#bass').get(0).currentTime = 0;
+				$('#bass').get(0).play();
+				$('.spaceBar').addClass('playing');
+			}
+
+			//po wciśnięciu odpowiedniego klawisza uruchamia funkcję
+			$(document).on("keydown", function(e) {
+				switch(e.keyCode) {
+					case 68 : firstChord();
+					break;
+					case 70 : secondChord();
+					break;
+					case 74 : thridChord();
+					break;
+					case 75 : fourthChord();
+					break;
+					case 32 : bass();
+					break;
+				}
+			});
+
+			//po zakończeniu eventu transition usuwa klasę
+			$(".key, .spaceBar").on("transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd", function() {
+			   	$('.key, .spaceBar').removeClass("playing");
+				}
+			);
+
+		</script>
+
+  </body>
+</html>
